@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: psec-planning-api
+    name: psec-planning
     env: node
     buildCommand: npm install && npx prisma generate && npm run build
     startCommand: npm start
