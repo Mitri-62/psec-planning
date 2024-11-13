@@ -1,1 +1,43 @@
-
+{
+  "name": "psec-planning",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "start": "node server/index.js",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.10.0",
+    "@fastify/cors": "^9.0.1",
+    "@fastify/websocket": "^8.3.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.26.1",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.344.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.22.3",
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.35",
+    "prisma": "^5.10.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
