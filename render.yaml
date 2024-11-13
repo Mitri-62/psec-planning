@@ -1,8 +1,10 @@
 services:
   - type: web
-    name: psec-planning-api
+    name: psec-planning
     env: node
-    buildCommand: npm install && npx prisma generate && npm run build
+    region: Oregon
+    plan: free
+    buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
       - key: NODE_ENV
@@ -12,8 +14,10 @@ services:
       - key: JWT_SECRET
         sync: false
       - key: PORT
-        value: 3000
+        value: "10000"
+      - key: HOST
+        value: "0.0.0.0"
       - key: CORS_ORIGIN
-        sync: false
+        value: "https://${RENDER_EXTERNAL_HOSTNAME}"
     healthCheckPath: /api/health
     autoDeploy: true
