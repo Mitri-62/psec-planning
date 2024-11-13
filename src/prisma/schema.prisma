@@ -1,19 +1,51 @@
-services:
-  - type: web
-    name: psec-planning-api
-    env: node
-    buildCommand: npm install && npx prisma generate && npm run build
-    startCommand: npm start
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: DATABASE_URL
-        sync: false
-      - key: JWT_SECRET
-        sync: false
-      - key: PORT
-        value: 3000
-      - key: CORS_ORIGIN
-        sync: false
-    healthCheckPath: /api/health
-    autoDeploy: true
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String      @id @default(uuid())
+  email         String      @unique
+  password      String
+  name          String
+  role          String
+  companyId     String
+  lastActive    DateTime    @default(now())
+  createdAt     DateTime    @default(now())
+  company       Company     @relation(fields: [companyId], references: [id])
+  createdReceptions Reception[] @relation("CreatedBy")
+  modifiedReceptions Reception[] @relation("ModifiedBy")
+}
+
+model Company {
+  id          String      @id @default(uuid())
+  name        String
+  users       User[]
+  receptions  Reception[]
+  createdAt   DateTime    @default(now())
+}
+
+model Reception {
+  id          String    @id @default(uuid())
+  date        DateTime
+  hour        Int
+  minutes     Int
+  transporteur String
+  reference   String?
+  status      String
+  notes       String?
+  position    Int
+  companyId   String
+  createdById String
+  modifiedById String?
+  createdAt   DateTime  @default(now())
+  modifiedAt  DateTime?
+  
+  company     Company   @relation(fields: [companyId], references: [id])
+  createdBy   User      @relation("CreatedBy", fields: [createdById], references: [id])
+  modifiedBy  User?     @relation("ModifiedBy", fields: [modifiedById], references: [id])
+}
