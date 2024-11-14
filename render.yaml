@@ -2,7 +2,7 @@ services:
   - type: web
     name: psec-planning
     env: node
-    region: Oregon
+    region: oregon
     plan: free
     buildCommand: npm install && npm run build
     startCommand: npm start
